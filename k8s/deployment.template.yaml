@@ -1,0 +1,51 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {appName}
+  namespace: {namespace}
+  labels:
+    app: {appName}
+spec:
+  revisionHistoryLimit: 3
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      name: {appName}
+      labels:
+        app: {appName}
+    spec:
+      containers:
+      - name: {appName}
+        image: {image}
+        env:
+        - name: TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: {appName}
+              key: token
+        resources:
+          limits:
+            cpu: 1
+            memory: 512Mi
+          requests:
+            cpu: 100m
+            memory: 512Mi
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+#        livenessProbe:
+#          httpGet:
+#            path: /appinfo/health
+#            port: 8080
+#            scheme: HTTP
+#          initialDelaySeconds: 120
+#          timeoutSeconds: 5
+#        readinessProbe:
+#          httpGet:
+#            path: /appinfo/health
+#            port: 8080
+#          initialDelaySeconds: 120
+#          timeoutSeconds: 5
