@@ -2,10 +2,7 @@
 github-raw-content-service
 
 Voorbeeld call: 
-http://localhost:8080/<repo>?filepath=grafana/helm-config.yaml\&org=<github org>
-Note: The backslash must be before &, special character, otherwise it wont work. 
-You may also quote the whole http string like this:
-'http://localhost:8080/<repo>?filepath=grafana/helm-config.yaml&org=<github org>'
+http://localhost:8080/<repo>?filepath=grafana/helm-config.yaml
 
 ## Aanmaken Python virtual omgeving
 ```
