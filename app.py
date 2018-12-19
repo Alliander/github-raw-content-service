@@ -12,7 +12,8 @@ app = Flask(__name__)
 
 @app.route('/<repo>')
 def index(repo):
-
+    #print request.args.get('filepath')
+    #print request.args.get('org')
     filepathparam  = request.args.get('filepath', None)
     orgparam  = request.args.get('org', None)
 
