@@ -12,14 +12,23 @@ app = Flask(__name__)
 
 @app.route('/<repo>')
 def index(repo):
-    #print request.args.get('filepath')
-    #print request.args.get('org')
+
+    org_param = request.args.get("org")
+    if org_param is None:
+       print ("Argument org not provided")
+
+    filepathparam = request.args.get("filepath")
+    if filepathparam is None:
+        print ("Argument filepath not provided")
+
     filepathparam  = request.args.get('filepath', None)
-    orgparam  = request.args.get('org', None)
+    org_param  = request.args.get('org', None)
+
+    print (org_param)
 
     # First create a Github instance:
     g = Github(os.environ['TOKEN'])
-    org = g.get_organization(orgparam)
+    org = g.get_organization(org_param)
     repo = org.get_repo(repo)
 
     file_contents= repo.get_file_contents(filepathparam)
